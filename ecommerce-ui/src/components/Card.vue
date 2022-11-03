@@ -22,15 +22,12 @@
       </div>
     </div>
   </div>
-
-  <div>
-    
-  </div>
 </template>
 
 <script>
 import axios from 'axios';
 import lib from "@/scripts/lib";
+import * as _ from 'lodash';
 
 export default {
   name: "Card",
@@ -45,6 +42,65 @@ export default {
     };
     return { lib, addToCart };
   },
+  methods: {
+    executePayment(paymentType) {
+
+      // if (paymentType === "KAKAO_PAYMENT") {
+      //   this.payOnKakao();
+      // } else if (paymentType === "NAVER_PAYMENT") {
+      //   this.payOnNaver();
+      // } else if (paymentType === "COUPANG_PAYMENT") {
+      //   this.payOnCoupang();
+      // } else if (paymentType === "PAYCO_PAYMENT") {
+      //   this.payOnCoupang();
+      // } else if (paymentType === "APPLE_PAYMENT") {
+      //   this.payOnCoupang();
+      // }
+
+      // const paymentMap = {
+      //   KAKAO_PAYMENT() {
+      //     this.payOnKakao();
+      //   }
+      //   ,NAVER_PAYMENT() {
+      //     this.payOnNaver();
+      //   }
+      //   ,COUPANG_PAYMENT() {
+      //     this.payOnCoupang();
+      //   }
+      //   ,PAYCO_PAYMENT() {
+      //     this.payOnPayco();
+      //   }
+      //   ,APPLE_PAYMENT() {
+      //     this.payOnApple();
+      //   }
+      // }
+      
+      const methodName = _.camelCase("payOn" + paymentType);
+      const paymentMap = {
+        [paymentType + "_PAYMENT"]() {
+          this[methodName]();
+        }
+      }
+
+      paymentMap[paymentType]();
+      // this.executePayment("KAKAO_PAYMENT");
+    }
+    ,payOnCoupang() {
+
+    }
+    ,payOnNaver() {
+
+    }
+    ,payOnCoupang() {
+
+    }
+    ,payOnPayco() {
+
+    }
+    ,payOnApple() {
+
+    }
+  }
 };
 </script>
 
